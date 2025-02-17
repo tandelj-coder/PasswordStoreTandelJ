@@ -2,6 +2,7 @@ package ca.sheridan.tandelj.passwordstoretandelj.controllers;
 
 import ca.sheridan.tandelj.passwordstoretandelj.beans.PasswordRecord;
 import ca.sheridan.tandelj.passwordstoretandelj.databases.DatabaseAccess;
+import ca.sheridan.tandelj.passwordstoretandelj.utilities.RandomNumberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,9 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("passwordRecord", new PasswordRecord());
+        PasswordRecord pr = new PasswordRecord();
+        pr.setId(RandomNumberGenerator.generateNineDigitNumber());
+        model.addAttribute("passwordRecord", pr);
         return "index";
     }
 
@@ -25,6 +28,9 @@ public class HomeController {
     public String addRecord(@ModelAttribute PasswordRecord passwordRecord, Model model) {
         databaseAccess.save(passwordRecord);
         model.addAttribute("message", "Record added successfully!");
+        PasswordRecord pr = new PasswordRecord();
+        pr.setId(RandomNumberGenerator.generateNineDigitNumber());
+        model.addAttribute("passwordRecord", pr);
         return "index";
     }
 
