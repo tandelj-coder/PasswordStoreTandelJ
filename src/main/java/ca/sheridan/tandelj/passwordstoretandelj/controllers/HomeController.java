@@ -2,6 +2,7 @@ package ca.sheridan.tandelj.passwordstoretandelj.controllers;
 
 import ca.sheridan.tandelj.passwordstoretandelj.beans.PasswordRecord;
 import ca.sheridan.tandelj.passwordstoretandelj.databases.DatabaseAccess;
+import ca.sheridan.tandelj.passwordstoretandelj.services.PasswordService;
 import ca.sheridan.tandelj.passwordstoretandelj.utilities.RandomNumberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
