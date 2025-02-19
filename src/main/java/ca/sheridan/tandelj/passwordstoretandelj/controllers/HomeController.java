@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @Controller
 public class HomeController {
+    private final PasswordService passwordService;
+
+    public HomeController(PasswordService passwordService) {
+        this.passwordService = passwordService;
+    }
     @Autowired
     private DatabaseAccess databaseAccess;
     @GetMapping("/")
@@ -28,11 +33,11 @@ public class HomeController {
         model.addAttribute("passwordRecord", pr);
         return "index";
     }
-    @GetMapping("/viewPasswordRecord")
+    @GetMapping("/viewRecords")
     public String viewRecords(Model model) {
-        List<PasswordRecord> records = databaseAccess.findAll();
+        List<PasswordRecord> records = passwordService.getAllPasswords();
         model.addAttribute("records", records);
-        return "viewPasswordRecord";
+        return "viewPasswordRecord";  // Renders the viewPasswordRecord.html page
     }
     @GetMapping("/searchPasswordRecord")
     public String search(@RequestParam(value = "title", required = false) String title, Model model) {
